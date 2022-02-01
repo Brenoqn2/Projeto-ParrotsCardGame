@@ -20,6 +20,14 @@ h1{
 .carta{
     height:146px;
     width:117px;
+    margin-right:34px;
+    margin-top:34px;
+    position:relative;
+}
+
+.face{
+    width:100%;
+    height:100%;
     background-color:#A7E9AF;
     border: 1px solid #99CEA8;
     box-sizing: border-box;
@@ -27,8 +35,22 @@ h1{
     display:flex;
     justify-content: center;
     align-items:center;
-    margin-right:34px;
-    margin-top:34px;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+    position:absolute;
+}
+
+.back-face{
+    transform:rotateY(180deg);
+}
+
+.carta:hover .back-face{
+    transform: rotateY(0deg);
+}
+
+.carta:hover .front-face{
+    transform: rotateY(-180deg);
 }
 
 div{

@@ -45,11 +45,15 @@ h1{
     transform:rotateY(180deg);
 }
 
-.carta:hover .back-face{
+.carta:hover {
+    cursor:pointer;
+}
+
+.virada .back-face{
     transform: rotateY(0deg);
 }
 
-.carta:hover .front-face{
+.virada .front-face{
     transform: rotateY(-180deg);
 }
 
@@ -68,6 +72,10 @@ div{
 
 .mobile{
     display:none;
+}
+
+.parCerto{
+    cursor:initial;
 }
 
 @media(max-width:614px){

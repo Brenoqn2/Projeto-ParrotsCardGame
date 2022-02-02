@@ -58,7 +58,9 @@ function comecarJogo(){
     pares.sort(comparador);
     for(let i = 0; i < pares.length; i++){
         let carta = document.createElement('div');
-        carta.classList.add("carta")
+        carta.classList.add("carta");
+        carta.setAttribute("id",pares[i].id);
+        carta.setAttribute("onclick","virarCarta(this)");
         let frontFace = document.createElement('div');
         frontFace.classList.add("front-face","face");
         let backFace = document.createElement('div');
@@ -66,12 +68,47 @@ function comecarJogo(){
         let frontImg = document.createElement('img');
         frontImg.setAttribute('src','front.png');
         let backImg = document.createElement('img');
-        backImg.setAttribute('src',pares[i].nome)
+        backImg.setAttribute('src',pares[i].nome);
         let cartas = document.getElementById('cartas');
         cartas.appendChild(carta);
         carta.appendChild(frontFace);
         frontFace.appendChild(frontImg);
         carta.appendChild(backFace);
         backFace.appendChild(backImg);
+    }
+}
+let carta1 = '';
+let carta2='';
+function virarCarta(carta){
+    if (carta.classList.contains('parCerto') == false){ 
+        if (carta.classList.contains('virada')){
+            carta1='';
+            carta.classList.remove('virada');
+        }
+        else{
+            carta.classList.add('virada');
+            if (carta1==''){
+                carta1=carta;
+            }
+            else{
+                carta2=carta;
+                setTimeout(verificarPar,1500);
+            }
+        }
+    }
+}
+
+function verificarPar(){
+    if (carta1.id == carta2.id){
+        carta1.classList.add('parCerto');
+        carta2.classList.add('parCerto');
+        carta1='';
+        carta2='';
+    }
+    else{
+        carta1.classList.remove('virada');
+        carta2.classList.remove('virada');
+        carta1='';
+        carta2='';
     }
 }

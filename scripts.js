@@ -38,6 +38,9 @@ function comparador(){
     return Math.random() - 0.5;
 }
 
+let contFinalJogo = 0;
+let quantidadePares = 0;
+
 function comecarJogo(){
     let quantidadeCartas = 0;
     let pares = [primeiroPar, segundoPar, terceiroPar, quartoPar, quintoPar, sextoPar, setimoPar];
@@ -51,8 +54,8 @@ function comecarJogo(){
     while (pares.length !== quantidadeCartas/2){
         pares.pop();
     }
-    const numeroDePares = pares.length
-    for(let i = 0; i < numeroDePares; i++){
+    quantidadePares = pares.length 
+    for(let i = 0; i < quantidadePares; i++){
         pares.push(pares[i]);
     }
     pares.sort(comparador);
@@ -79,6 +82,8 @@ function comecarJogo(){
 }
 let carta1 = '';
 let carta2='';
+let contadorJogadas = 0;
+
 function virarCarta(carta){
     if (carta.classList.contains('parCerto') == false){ 
         if (carta1 == '' || carta2 ==''){
@@ -88,6 +93,7 @@ function virarCarta(carta){
             }
             else{
                 carta.classList.add('virada');
+                contadorJogadas++;
                 if (carta1==''){
                     carta1=carta;
                 }
@@ -107,6 +113,11 @@ function verificarPar(){
         carta2.classList.add('parCerto');
         carta1='';
         carta2='';
+        contFinalJogo++;
+        if (contFinalJogo == quantidadePares){
+            alert("Você ganhou em " + String(contadorJogadas) + " jogadas!")
+
+        }
     }
     else{
         carta1.classList.remove('virada');14

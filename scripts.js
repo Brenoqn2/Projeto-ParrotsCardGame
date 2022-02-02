@@ -81,22 +81,25 @@ let carta1 = '';
 let carta2='';
 function virarCarta(carta){
     if (carta.classList.contains('parCerto') == false){ 
-        if (carta.classList.contains('virada')){
-            carta1='';
-            carta.classList.remove('virada');
-        }
-        else{
-            carta.classList.add('virada');
-            if (carta1==''){
-                carta1=carta;
+        if (carta1 == '' || carta2 ==''){
+            if (carta.classList.contains('virada')){
+                carta1='';
+                carta.classList.remove('virada');
             }
             else{
-                carta2=carta;
-                setTimeout(verificarPar,1500);
+                carta.classList.add('virada');
+                if (carta1==''){
+                    carta1=carta;
+                }
+                else{
+                    carta2=carta;
+                    setTimeout(verificarPar,1500);
+                }
             }
         }
     }
 }
+
 
 function verificarPar(){
     if (carta1.id == carta2.id){
@@ -106,7 +109,7 @@ function verificarPar(){
         carta2='';
     }
     else{
-        carta1.classList.remove('virada');
+        carta1.classList.remove('virada');14
         carta2.classList.remove('virada');
         carta1='';
         carta2='';

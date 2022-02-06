@@ -118,6 +118,18 @@ function verificarPar(){
         if (contFinalJogo == quantidadePares){
             alert("Você ganhou em " + String(contadorJogadas) + " jogadas e " + tempoDeJogo + " segundos!");
             clearInterval(timer);
+            let comecarNovoJogo = prompt("Gostaria de reiniciar a partida?").toLowerCase();
+            if (comecarNovoJogo == "sim" || comecarNovoJogo == "s" || comecarNovoJogo == "si" || comecarNovoJogo == "yes" || comecarNovoJogo == "y" || comecarNovoJogo == "ye"){
+                contFinalJogo = 0;
+                carta1='';
+                carta2='';
+                contadorJogadas=0;
+                tempoDeJogo = 0;
+                document.getElementById('cartas').innerHTML = "";
+                comecarJogo();
+            }
+
+
         }
     }
     else{

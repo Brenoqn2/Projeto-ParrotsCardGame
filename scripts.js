@@ -33,6 +33,8 @@ let setimoPar = {
     id:"par7"
 };
 
+let timer = null;
+let tempoDeJogo = 0;
 
 function comparador(){
     return Math.random() - 0.5;
@@ -79,6 +81,7 @@ function comecarJogo(){
         carta.appendChild(backFace);
         backFace.appendChild(backImg);
     }
+    timer = setInterval(comecarTimer,1000)
 }
 let carta1 = '';
 let carta2='';
@@ -88,8 +91,6 @@ function virarCarta(carta){
     if (carta.classList.contains('parCerto') == false){ 
         if (carta1 == '' || carta2 ==''){
             if (carta.classList.contains('virada')){
-                carta1='';
-                carta.classList.remove('virada');
             }
             else{
                 carta.classList.add('virada');
@@ -115,14 +116,19 @@ function verificarPar(){
         carta2='';
         contFinalJogo++;
         if (contFinalJogo == quantidadePares){
-            alert("Você ganhou em " + String(contadorJogadas) + " jogadas!")
-
+            alert("Você ganhou em " + String(contadorJogadas) + " jogadas e " + tempoDeJogo + " segundos!");
+            clearInterval(timer);
         }
     }
     else{
-        carta1.classList.remove('virada');14
+        carta1.classList.remove('virada');
         carta2.classList.remove('virada');
         carta1='';
         carta2='';
     }
+}
+
+function comecarTimer(){
+    tempoDeJogo++;
+    document.querySelector(".timer").innerHTML = tempoDeJogo;
 }

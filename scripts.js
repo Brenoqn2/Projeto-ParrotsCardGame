@@ -62,44 +62,37 @@ function comecarJogo(){
     }
     pares.sort(comparador);
     for(let i = 0; i < pares.length; i++){
-        let carta = document.createElement('div');
-        carta.classList.add("carta");
-        carta.setAttribute("id",pares[i].id);
-        carta.setAttribute("onclick","virarCarta(this)");
-        let frontFace = document.createElement('div');
-        frontFace.classList.add("front-face","face");
-        let backFace = document.createElement('div');
-        backFace.classList.add("back-face","face");
-        let frontImg = document.createElement('img');
-        frontImg.setAttribute('src','front.png');
-        let backImg = document.createElement('img');
-        backImg.setAttribute('src',pares[i].nome);
-        let cartas = document.getElementById('cartas');
-        cartas.appendChild(carta);
-        carta.appendChild(frontFace);
-        frontFace.appendChild(frontImg);
-        carta.appendChild(backFace);
-        backFace.appendChild(backImg);
+        document.getElementById("cartas").innerHTML += 
+        `
+         <div class="carta" id=${pares[i].id} onclick="virarCarta(this)" data-identifier="card">
+            <div class="back-face face" data-identifier="back-face">
+                <img src="backFace.png" />
+            </div>
+            <div class="front-face face" data-identifier="front-face">
+                <img src=${pares[i].nome} />
+            </div>
+        </div>
+        `;
     }
     timer = setInterval(comecarTimer,1000)
 }
-let carta1 = '';
-let carta2='';
+let primeiraCarta = '';
+let segundaCarta='';
 let contadorJogadas = 0;
 
 function virarCarta(carta){
     if (carta.classList.contains('parCerto') == false){ 
-        if (carta1 == '' || carta2 ==''){
+        if (primeiraCarta == '' || segundaCarta ==''){
             if (carta.classList.contains('virada')){
             }
             else{
                 carta.classList.add('virada');
                 contadorJogadas++;
-                if (carta1==''){
-                    carta1=carta;
+                if (primeiraCarta==''){
+                    primeiraCarta=carta;
                 }
                 else{
-                    carta2=carta;
+                    segundaCarta=carta;
                     setTimeout(verificarPar,1500);
                 }
             }
@@ -109,11 +102,11 @@ function virarCarta(carta){
 
 
 function verificarPar(){
-    if (carta1.id == carta2.id){
-        carta1.classList.add('parCerto');
-        carta2.classList.add('parCerto');
-        carta1='';
-        carta2='';
+    if (primeiraCarta.id == segundaCarta.id){
+        primeiraCarta.classList.add('parCerto');
+        segundaCarta.classList.add('parCerto');
+        primeiraCarta='';
+        segundaCarta='';
         contFinalJogo++;
         if (contFinalJogo == quantidadePares){
             alert("Você ganhou em " + String(contadorJogadas) + " jogadas e " + tempoDeJogo + " segundos!");
@@ -121,8 +114,8 @@ function verificarPar(){
             let comecarNovoJogo = prompt("Gostaria de reiniciar a partida?").toLowerCase();
             if (comecarNovoJogo == "sim" || comecarNovoJogo == "s" || comecarNovoJogo == "si" || comecarNovoJogo == "yes" || comecarNovoJogo == "y" || comecarNovoJogo == "ye"){
                 contFinalJogo = 0;
-                carta1='';
-                carta2='';
+                primeiraCarta='';
+                segundaCarta='';
                 contadorJogadas=0;
                 tempoDeJogo = 0;
                 document.getElementById('cartas').innerHTML = "";
@@ -133,10 +126,10 @@ function verificarPar(){
         }
     }
     else{
-        carta1.classList.remove('virada');
-        carta2.classList.remove('virada');
-        carta1='';
-        carta2='';
+        primeiraCarta.classList.remove('virada');
+        segundaCarta.classList.remove('virada');
+        primeiraCarta='';
+        segundaCarta='';
     }
 }
 
@@ -144,3 +137,4 @@ function comecarTimer(){
     tempoDeJogo++;
     document.querySelector(".timer").innerHTML = tempoDeJogo;
 }
+comecarJogo();

@@ -41,7 +41,7 @@ h1{
     position:absolute;
 }
 
-.back-face{
+.front-face{
     transform:rotateY(180deg);
 }
 
@@ -49,11 +49,11 @@ h1{
     cursor:pointer;
 }
 
-.virada .back-face{
+.virada .front-face{
     transform: rotateY(0deg);
 }
 
-.virada .front-face{
+.virada .back-face{
     transform: rotateY(-180deg);
 }
 
